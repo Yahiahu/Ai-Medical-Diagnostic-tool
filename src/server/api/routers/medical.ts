@@ -31,14 +31,14 @@ export const medicalRouter = createTRPCRouter({
   }),
 
   prompt: protectedProcedure
-    .input(z.object({ symptoms: z.string().min(5),painThreashold: z.number().min(1).max(10) }))
+    .input(z.object({ symptoms: z.string().min(5), painThreashold: z.number().min(1).max(10), medications: z.string().min(0), pastMedicalHistory: z.string().min(0), age: z.number().min(0).max(100), gender: z.enum(["male", "female"])  }))
     .mutation(async ({ input, ctx }) => {
       console.log(JSON.stringify(input))
 
       const response = await openai.createCompletion({
         model: "text-davinci-003",
         prompt: `Using the following information make a pretend diagnosis: ${JSON.stringify(input)}`,
-        max_tokens: 100,
+        max_tokens: 500,
         temperature: 0.5,
  });
     const diagnosis = response.data.choices[0]?.text ?? ""

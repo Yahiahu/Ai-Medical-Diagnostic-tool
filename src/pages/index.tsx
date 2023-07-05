@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Button,
   Flex,
@@ -7,9 +8,22 @@ import {
   Text,
   useBreakpointValue,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 import UserLayout from "~/components/layouts/UserLayout";
 
 export default function SplitScreen() {
+  const router = useRouter();
+  const { data: sessionData } = useSession();
+
+  const handleDiagnoseMe = () => {
+    if (sessionData) {
+      void router.push("http://localhost:3000/dashboard");
+    } else {
+      void router.push("http://localhost:3000/auth/sign-in");
+    }
+  };
+
   return (
     <UserLayout>
       <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>
@@ -30,15 +44,19 @@ export default function SplitScreen() {
                   zIndex: -1,
                 }}
               >
-                Freelance
+                Self-Reported Medical Diagnostic Tool
               </Text>
               <br />{" "}
               <Text color={"blue.400"} as={"span"}>
-                Design Projects
+                Powered by Ai
               </Text>{" "}
             </Heading>
             <Text fontSize={{ base: "md", lg: "lg" }} color={"gray.500"}>
-            This website aims to democratize medicine and reduce wait times by providing individuals with quick and efficient diagnosis based on their symptoms and pain level. By leveraging technology, we strive to make healthcare accessible to everyone and empower individuals to take control of their health.
+              This website aims to democratize medicine and reduce wait times by
+              providing individuals with quick and efficient diagnosis based on
+              their symptoms and pain level. By leveraging technology, we strive
+              to make healthcare accessible to everyone and empower individuals
+              to take control of their health.
             </Text>
             <Stack direction={{ base: "column", md: "row" }} spacing={4}>
               <Button
@@ -48,10 +66,10 @@ export default function SplitScreen() {
                 _hover={{
                   bg: "blue.500",
                 }}
+                onClick={handleDiagnoseMe}
               >
-                Create Project
+                {sessionData ? "Go to Dashboard" : "Diagnose me"}
               </Button>
-              <Button rounded={"full"}>How It Works</Button>
             </Stack>
           </Stack>
         </Flex>
@@ -59,9 +77,7 @@ export default function SplitScreen() {
           <Image
             alt={"Login Image"}
             objectFit={"cover"}
-            src={
-              "https://images.unsplash.com/photo-1527689368864-3a821dbccc34?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-            }
+            src={"https://i.ebayimg.com/images/g/OoEAAOSwmfhX3E15/s-l1600.jpg"}
           />
         </Flex>
       </Stack>
