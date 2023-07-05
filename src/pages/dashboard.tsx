@@ -15,6 +15,7 @@ import {
   Image,
 } from "@chakra-ui/react";
 import { api } from "~/utils/api";
+import { useRouter } from "next/router";
 
 interface HealthData {
   symptoms: string;
@@ -36,6 +37,7 @@ function Dashboard() {
     gender: "male",
   });
   const [diagnosis, setDiagnosis] = useState<string | null>(null);
+  const router = useRouter();
 
   const updateData = (
     key: keyof HealthData,
@@ -57,8 +59,25 @@ function Dashboard() {
     setDiagnosis(diagnosis);
   };
 
+  const handleHome = () => {
+    void router.push("/");
+  };
+
   return (
     <VStack spacing={6} padding={6}>
+      <Flex justify="flex-end" width="100%">
+        <Button
+          as="a"
+          onClick={handleHome}
+          size="lg"
+          bg="#6F4FFF"
+          color="#FFFFFF"
+          variant="solid"
+        >
+          Home
+        </Button>
+      </Flex>
+
       <Heading as="h2" size="xl">
         Health Input Form
       </Heading>
@@ -161,34 +180,18 @@ function Dashboard() {
       </Box>
 
       <Flex justify="center" width="100%" marginBottom={6}>
-    
-         
-  <Button
-    size="lg"
-    bg="#6F4FFF"
-    color="#FFFFFF"
-    fontWeight="bold"
-    onClick={handleSubmit}
-    isLoading={prompt.isLoading}
-    isDisabled={prompt.isLoading}
-  >
-    Submit
-  </Button>
-</Flex>
-
-<Flex justify="flex-start">
-  <Button
-    as="a"
-    href="http://localhost:3000/"
-    size="lg"
-    colorScheme="blue"
-    variant="solid"
-  >
-    Home
-  </Button>
-</Flex>
-
-
+        <Button
+          size="lg"
+          bg="#6F4FFF"
+          color="#FFFFFF"
+          fontWeight="bold"
+          onClick={handleSubmit}
+          isLoading={prompt.isLoading}
+          isDisabled={prompt.isLoading}
+        >
+          Submit
+        </Button>
+      </Flex>
 
       {prompt.isLoading && <Spinner />}
       {prompt.isError && <Text>Error!</Text>}

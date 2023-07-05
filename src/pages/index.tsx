@@ -18,9 +18,9 @@ export default function SplitScreen() {
 
   const handleDiagnoseMe = () => {
     if (sessionData) {
-      void router.push("http://localhost:3000/dashboard");
+      void router.push("/dashboard");
     } else {
-      void router.push("http://localhost:3000/auth/sign-in");
+      void router.push("/auth/sign-in");
     }
   };
 
@@ -48,7 +48,7 @@ export default function SplitScreen() {
               </Text>
               <br />{" "}
               <Text color={"blue.400"} as={"span"}>
-                Powered by Ai
+                Powered by AI
               </Text>{" "}
             </Heading>
             <Text fontSize={{ base: "md", lg: "lg" }} color={"gray.500"}>
