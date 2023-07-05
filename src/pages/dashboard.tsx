@@ -70,6 +70,7 @@ function Dashboard() {
         helpful resource to provide a general understanding of potential health
         concerns.
       </Text>
+
       <Box width="100%" display="flex" alignItems="center">
         <Textarea
           value={data.symptoms}
@@ -104,7 +105,7 @@ function Dashboard() {
           onChange={(value) => updateData("painLevel", value)}
         >
           <SliderTrack>
-            <SliderFilledTrack />
+            <SliderFilledTrack bg="red" />
           </SliderTrack>
           <SliderThumb boxSize={6}>{data.painLevel}</SliderThumb>
         </Slider>
@@ -159,17 +160,35 @@ function Dashboard() {
         />
       </Box>
 
-      <Button
-        size="lg"
-        bg="#6F4FFF"
-        color="#FFFFFF"
-        fontWeight="bold"
-        onClick={handleSubmit}
-        isLoading={prompt.isLoading}
-        isDisabled={prompt.isLoading}
-      >
-        Submit
-      </Button>
+      <Flex justify="center" width="100%" marginBottom={6}>
+    
+         
+  <Button
+    size="lg"
+    bg="#6F4FFF"
+    color="#FFFFFF"
+    fontWeight="bold"
+    onClick={handleSubmit}
+    isLoading={prompt.isLoading}
+    isDisabled={prompt.isLoading}
+  >
+    Submit
+  </Button>
+</Flex>
+
+<Flex justify="flex-start">
+  <Button
+    as="a"
+    href="http://localhost:3000/"
+    size="lg"
+    colorScheme="blue"
+    variant="solid"
+  >
+    Home
+  </Button>
+</Flex>
+
+
 
       {prompt.isLoading && <Spinner />}
       {prompt.isError && <Text>Error!</Text>}

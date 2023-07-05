@@ -32,7 +32,7 @@ export const medicalRouter = createTRPCRouter({
 
   prompt: protectedProcedure
     .input(z.object({ symptoms: z.string().min(5), painThreashold: z.number().min(1).max(10), medications: z.string().min(0), pastMedicalHistory: z.string().min(0), age: z.number().min(0).max(100), gender: z.enum(["male", "female"])  }))
-    .mutation(async ({ input, ctx }) => {
+    .mutation(async ({ input }) => {
       console.log(JSON.stringify(input))
 
       const response = await openai.createCompletion({
