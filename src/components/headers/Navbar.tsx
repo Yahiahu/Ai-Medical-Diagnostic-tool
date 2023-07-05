@@ -21,11 +21,14 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
 } from "@chakra-ui/icons";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure();
   const { data: sessionData } = useSession();
+  const router = useRouter()
+
   return (
     <Box>
       <Flex
@@ -77,7 +80,7 @@ export default function WithSubnavigation() {
             fontSize={"sm"}
             bgColor={sessionData ? "blue.50": "blue.300"}
             fontWeight={400}
-            onClick={sessionData ? () => void signOut() : () => void signIn()}
+            onClick={sessionData ? () => void signOut() : () => void router.push("/auth/sign-in")}
           >
             {sessionData ? "Sign Out": "Sign In"}
           </Button>

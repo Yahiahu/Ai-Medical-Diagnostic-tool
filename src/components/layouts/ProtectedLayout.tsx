@@ -32,7 +32,7 @@ export const ProtectedLayout: React.FC<ProtectedLayoutProps> = ({
     if (unAuthorized) {
       console.log("not authorized");
       void router.push({
-        pathname: "/api/auth/signin",
+        pathname: "/api/auth/sign-in",
         query: { returnUrl: router.asPath },
       });
     }

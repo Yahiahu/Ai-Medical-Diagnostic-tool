@@ -47,6 +47,13 @@ export const authOptions: NextAuthOptions = {
     }),
   },
   adapter: PrismaAdapter(prisma),
+  pages: {
+    // what does signIn do? https://next-auth.js.org/configuration/pages#sign-in
+    signIn: "/auth/sign-in",
+    signOut: "/auth/sign-in",
+    error: "/auth/sign-in", // Error code passed in query string as ?error=
+  },
+
   providers: [
     DiscordProvider({
       clientId: env.DISCORD_CLIENT_ID,
