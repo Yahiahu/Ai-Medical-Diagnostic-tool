@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 
 import {
   Box,
@@ -10,7 +10,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 
-const Logo = (props: any) => {
+const Logo = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
       height={32}

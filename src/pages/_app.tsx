@@ -1,6 +1,6 @@
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
-import { AppProps, type AppType } from "next/app";
+import { type AppProps, type AppType } from "next/app";
 import { api } from "~/utils/api";
 import "~/styles/globals.css";
 import * as React from "react";
@@ -13,7 +13,8 @@ interface AppAuthProps {
 }
 
 type AppPropsWithAuth = AppProps & AppAuthProps;
-const MyApp: AppType<{ session: Session | null }> = ({
+
+const MyApp: AppType<AppPropsWithAuth> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
