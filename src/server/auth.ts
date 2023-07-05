@@ -1,5 +1,6 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { type GetServerSidePropsContext } from "next";
+import GoogleProvider from "next-auth/providers/google";
 import {
   getServerSession,
   type NextAuthOptions,
@@ -51,6 +52,11 @@ export const authOptions: NextAuthOptions = {
       clientId: env.DISCORD_CLIENT_ID,
       clientSecret: env.DISCORD_CLIENT_SECRET,
     }),
+
+    GoogleProvider({
+      clientId: "428203345661-i8dhiu2m05qt9aj12fd1da83kh6a320c.apps.googleusercontent.com",
+      clientSecret: "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",
+    })
     /**
      * ...add more providers here.
      *
